@@ -1,0 +1,6 @@
+TODO list for project:
+1) Add configuration for app
+2) Add phantom-js to project
+3) Find sprites for UI
+4) Add UI for app
+5) Add autoupdate module
