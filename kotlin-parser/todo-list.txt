@@ -1,0 +1,6 @@
+TODO list for project:
+1) Add parsing response from Avito
+2) Add internal model of parser
+3) Add Email notification module
+4) Add Settings module
+5) Add user interface of app
