@@ -340,3 +340,9 @@ fun arrayCount(arr: IntArray): Int {
     if (arr.size == 1) return 1
     return 1 + arrayCount(arr.copyOfRange(1, arr.size))
 }
+
+fun arrayMax(arr: IntArray): Int {
+    if (arr.size == 1) return arr[0]
+    val localMax = arrayMax(arr.copyOfRange(1, arr.size))
+    return if (arr[0] > localMax) arr[0] else localMax
+}
