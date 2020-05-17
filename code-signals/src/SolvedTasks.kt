@@ -346,3 +346,24 @@ fun arrayMax(arr: IntArray): Int {
     val localMax = arrayMax(arr.copyOfRange(1, arr.size))
     return if (arr[0] > localMax) arr[0] else localMax
 }
+
+data class Tree<T>(var value: T) {
+    var left: Tree<T>? = null;
+    var right: Tree<T>? = null;
+}
+
+fun traverseTree(t: Tree<Int>?): MutableList<Int> {
+    val result = mutableListOf<Int>()
+    if (t == null) return result
+    val nodes = mutableListOf<Tree<Int>>()
+    nodes.add(t)
+    var currentIndex = 0
+    while (currentIndex < nodes.size) {
+        val currentNode = nodes[currentIndex]
+        result.add(currentNode.value)
+        if (currentNode.left != null) nodes.add(currentNode.left!!)
+        if (currentNode.right != null) nodes.add(currentNode.right!!)
+        currentIndex++
+    }
+    return result
+}

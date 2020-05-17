@@ -31,7 +31,17 @@ fun main() {
                             mutableListOf(3)
                     )
             )*/
-            traverseTree(root)
+            removeKFromList(ListNode(3).also {
+                it.next = ListNode(1).also {
+                    it.next = ListNode(2).also {
+                        it.next = ListNode(3).also {
+                            it.next = ListNode(4).also {
+                                it.next = ListNode(5)
+                            }
+                        }
+                    }
+                }
+            }, 3)
     )
 }
 
@@ -67,23 +77,25 @@ fun hashMap(queryType: MutableList<String>, query: MutableList<MutableList<Int>>
     return result
 }
 
-data class Tree<T>(var value: T) {
-    var left: Tree<T>? = null;
-    var right: Tree<T>? = null;
+data class ListNode<T>(var value: T) {
+    var next: ListNode<T>? = null;
 }
 
-fun traverseTree(t: Tree<Int>?): MutableList<Int> {
-    val result = mutableListOf<Int>()
-    if (t == null) return result
-    val nodes = mutableListOf<Tree<Int>>()
-    nodes.add(t)
-    var currentIndex = 0
-    while (currentIndex < nodes.size) {
-        val currentNode = nodes[currentIndex]
-        result.add(currentNode.value)
-        if (currentNode.left != null) nodes.add(currentNode.left!!)
-        if (currentNode.right != null) nodes.add(currentNode.right!!)
-        currentIndex++
+fun removeKFromList(l: ListNode<Int>?, k: Int): ListNode<Int>? {
+    var prev: ListNode<Int>? = null
+    var current = l
+    var head: ListNode<Int>? = null
+    while (current != null) {
+        if (current.value == k) {
+            if (prev != null) {
+                prev.next = current.next
+            }
+            current = current.next
+            continue
+        }
+        if (head == null) head = current
+        prev = current
+        current = current.next
     }
-    return result
+    return head
 }
