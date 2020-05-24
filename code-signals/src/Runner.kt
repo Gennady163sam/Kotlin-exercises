@@ -1,5 +1,9 @@
 package test
 
+import kotlin.math.abs
+import kotlin.math.ceil
+import kotlin.math.log
+
 fun main() {
     val root = Tree(1).also {
         it.left = Tree(2).also {
@@ -31,17 +35,16 @@ fun main() {
                             mutableListOf(3)
                     )
             )*/
-            removeKFromList(ListNode(3).also {
-                it.next = ListNode(1).also {
-                    it.next = ListNode(2).also {
-                        it.next = ListNode(3).also {
-                            it.next = ListNode(4).also {
-                                it.next = ListNode(5)
-                            }
+            /*isListPalindrome(ListNode(1).also {
+                it.next = ListNode(1000000000).also {
+                    it.next = ListNode(-1000000000).also {
+                        it.next = ListNode(-1000000000).also {
+                            it.next = ListNode(1000000000)
                         }
                     }
                 }
-            }, 3)
+            })*/
+        absoluteValuesSumMinimization(mutableListOf(2, 4, 7))
     )
 }
 
@@ -77,25 +80,23 @@ fun hashMap(queryType: MutableList<String>, query: MutableList<MutableList<Int>>
     return result
 }
 
-data class ListNode<T>(var value: T) {
-    var next: ListNode<T>? = null;
+fun isListPalindrome(l: ListNode<Int>?): Boolean {
+    if (l == null) return true
+    var slow = l
+    var fast = l
+    var size = 0
+    // find size
+    while (fast != null) {
+        size+=2
+        slow = slow!!.next
+        fast = fast.next?.next
+
+    }
+    return true
 }
 
-fun removeKFromList(l: ListNode<Int>?, k: Int): ListNode<Int>? {
-    var prev: ListNode<Int>? = null
-    var current = l
-    var head: ListNode<Int>? = null
-    while (current != null) {
-        if (current.value == k) {
-            if (prev != null) {
-                prev.next = current.next
-            }
-            current = current.next
-            continue
-        }
-        if (head == null) head = current
-        prev = current
-        current = current.next
-    }
-    return head
-}
+fun depositProfit(deposit: Int, rate: Int, threshold: Int) =
+    ceil(log((threshold.toDouble()/deposit), (1 + rate.toDouble() / 100))).toInt()
+
+
+

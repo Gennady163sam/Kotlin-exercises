@@ -1,5 +1,6 @@
 package test
 
+import java.lang.StringBuilder
 import kotlin.math.abs
 import kotlin.math.max
 
@@ -367,3 +368,53 @@ fun traverseTree(t: Tree<Int>?): MutableList<Int> {
     }
     return result
 }
+
+
+data class ListNode<T>(var value: T) {
+    var next: ListNode<T>? = null;
+}
+
+fun removeKFromList(l: ListNode<Int>?, k: Int): ListNode<Int>? {
+    var prev: ListNode<Int>? = null
+    var current = l
+    var head: ListNode<Int>? = null
+    while (current != null) {
+        if (current.value == k) {
+            if (prev != null) {
+                prev.next = current.next
+            }
+            current = current.next
+            continue
+        }
+        if (head == null) head = current
+        prev = current
+        current = current.next
+    }
+    return head
+}
+
+fun absoluteValuesSumMinimization(a: MutableList<Int>): Int {
+    var minSum = Long.MAX_VALUE
+    var result = 0
+    var currIndex = 0
+    do {
+        var absoluteSum = 0L
+        for (i in 0 until a.size) {
+            absoluteSum += abs(a[i] - a[currIndex])
+        }
+        if (absoluteSum > minSum) {
+            break
+        } else if (absoluteSum < minSum) {
+            result = currIndex
+            minSum = absoluteSum
+        } else if (absoluteSum == minSum && a[result] > a[currIndex]) {
+            result = currIndex
+        }
+        currIndex++
+    } while(currIndex < a.size - 1)
+    return a[result]
+}
+
+fun absoluteValuesSumMinimizationSimple(a: MutableList<Int>) =
+        if (a.size % 2 == 0) a.size / 2 - 1 else a.size / 2
+
