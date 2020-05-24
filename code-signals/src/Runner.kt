@@ -1,5 +1,9 @@
 package test
 
+import kotlin.math.abs
+import kotlin.math.ceil
+import kotlin.math.log
+
 fun main() {
     val root = Tree(1).also {
         it.left = Tree(2).also {
@@ -31,7 +35,16 @@ fun main() {
                             mutableListOf(3)
                     )
             )*/
-            traverseTree(root)
+            /*isListPalindrome(ListNode(1).also {
+                it.next = ListNode(1000000000).also {
+                    it.next = ListNode(-1000000000).also {
+                        it.next = ListNode(-1000000000).also {
+                            it.next = ListNode(1000000000)
+                        }
+                    }
+                }
+            })*/
+        absoluteValuesSumMinimization(mutableListOf(2, 4, 7))
     )
 }
 
@@ -67,23 +80,23 @@ fun hashMap(queryType: MutableList<String>, query: MutableList<MutableList<Int>>
     return result
 }
 
-data class Tree<T>(var value: T) {
-    var left: Tree<T>? = null;
-    var right: Tree<T>? = null;
+fun isListPalindrome(l: ListNode<Int>?): Boolean {
+    if (l == null) return true
+    var slow = l
+    var fast = l
+    var size = 0
+    // find size
+    while (fast != null) {
+        size+=2
+        slow = slow!!.next
+        fast = fast.next?.next
+
+    }
+    return true
 }
 
-fun traverseTree(t: Tree<Int>?): MutableList<Int> {
-    val result = mutableListOf<Int>()
-    if (t == null) return result
-    val nodes = mutableListOf<Tree<Int>>()
-    nodes.add(t)
-    var currentIndex = 0
-    while (currentIndex < nodes.size) {
-        val currentNode = nodes[currentIndex]
-        result.add(currentNode.value)
-        if (currentNode.left != null) nodes.add(currentNode.left!!)
-        if (currentNode.right != null) nodes.add(currentNode.right!!)
-        currentIndex++
-    }
-    return result
-}
+fun depositProfit(deposit: Int, rate: Int, threshold: Int) =
+    ceil(log((threshold.toDouble()/deposit), (1 + rate.toDouble() / 100))).toInt()
+
+
+
