@@ -1,6 +1,5 @@
 package test
 
-import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.log
 
@@ -44,7 +43,7 @@ fun main() {
                     }
                 }
             })*/
-        absoluteValuesSumMinimization(mutableListOf(2, 4, 7))
+            equalPairOfBits(10, 11)
     )
 }
 
@@ -97,6 +96,8 @@ fun isListPalindrome(l: ListNode<Int>?): Boolean {
 
 fun depositProfit(deposit: Int, rate: Int, threshold: Int) =
     ceil(log((threshold.toDouble()/deposit), (1 + rate.toDouble() / 100))).toInt()
+
+
 
 
 

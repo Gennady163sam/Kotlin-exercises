@@ -418,3 +418,61 @@ fun absoluteValuesSumMinimization(a: MutableList<Int>): Int {
 fun absoluteValuesSumMinimizationSimple(a: MutableList<Int>) =
         if (a.size % 2 == 0) a.size / 2 - 1 else a.size / 2
 
+
+fun equalPairOfBits(n: Int, m: Int): Int {
+    val firstRepresentation = Integer.toBinaryString(n)
+    val secondRepresentation = Integer.toBinaryString(m)
+
+    var i = 0
+    while (i < firstRepresentation.length || i < secondRepresentation.length) {
+        if (firstRepresentation[firstRepresentation.length - 1 - i] == secondRepresentation[secondRepresentation.length - 1 - i]) {
+            break
+        }
+        i++
+    }
+    return Math.pow(2.0, i.toDouble()).toInt()
+}
+
+
+fun canTransform(from: String, to: String): Boolean {
+    if (from.length != to.length) return false
+    var oneChange = false
+    for (i in from.indices) {
+        if(from[i] != to[i]) {
+            if (!oneChange) {
+                oneChange = true
+            } else {
+                return false
+            }
+        }
+    }
+    return true
+}
+fun checkRearrangement(inputArray: MutableList<String>):Boolean {
+    for (i in 1 until inputArray.size) {
+        if (!canTransform(inputArray[i - 1], inputArray[i])) {
+            return false
+        }
+    }
+    return true
+}
+
+fun getPermutations(inputArray: MutableList<String>): MutableList<MutableList<String>> {
+    if (inputArray.size == 1) return mutableListOf(inputArray)
+    val permutations = mutableListOf<MutableList<String>>()
+    val toInsert = inputArray[0]
+    for (perm in getPermutations(inputArray.drop(1) as MutableList<String>)) {
+        for (i in 0..perm.size) {
+            val newPerm = perm.toMutableList()
+            newPerm.add(i, toInsert)
+            permutations.add(newPerm)
+        }
+    }
+    return permutations
+}
+
+fun stringsRearrangement(inputArray: MutableList<String>): Boolean {
+    if (inputArray.size == 0 || inputArray.size == 1) return false
+    val permutations = getPermutations(inputArray)
+    return permutations.firstOrNull { checkRearrangement(it) } != null
+}
