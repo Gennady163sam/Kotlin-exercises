@@ -2,6 +2,8 @@ package test
 
 import java.lang.StringBuilder
 import kotlin.math.abs
+import kotlin.math.ceil
+import kotlin.math.log
 import kotlin.math.max
 
 fun commonCharacterCount(s1: String, s2: String): Int {
@@ -475,4 +477,25 @@ fun stringsRearrangement(inputArray: MutableList<String>): Boolean {
     if (inputArray.size == 0 || inputArray.size == 1) return false
     val permutations = getPermutations(inputArray)
     return permutations.firstOrNull { checkRearrangement(it) } != null
+}
+
+fun depositProfit(deposit: Int, rate: Int, threshold: Int) =
+        ceil(log((threshold.toDouble()/deposit), (1 + rate.toDouble() / 100))).toInt()
+
+
+fun digitDegree(n: Int): Int {
+    if (n < 10) return 0
+    val sumOfNumbers = n.toString().sumBy { Character.getNumericValue(it) }
+    return digitDegree(sumOfNumbers) + 1
+}
+
+fun bishopAndPawn(bishop: String, pawn: String) =
+        Math.abs(bishop[0] - pawn[0]) == Math.abs(bishop[1] - pawn[1])
+
+fun isBeautifulString(inputString: String): Boolean {
+    val countOfLetters = inputString.groupingBy { it }.eachCount()
+    for (letter in 'b' .. 'z') {
+        if (countOfLetters[letter - 1]?: 0 < countOfLetters[letter]?: 0) return false
+    }
+    return true
 }
