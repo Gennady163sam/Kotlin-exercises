@@ -499,3 +499,61 @@ fun isBeautifulString(inputString: String): Boolean {
     }
     return true
 }
+
+
+fun firstDigit(inputString: String) =
+        inputString.toCharArray().first { it.isDigit() }
+
+fun differentSymbolsNaive(s: String) = s.groupBy { it }.keys.size
+
+fun arrayMaxConsecutiveSum(inputArray: MutableList<Int>, k: Int): Int {
+    var maximum = 0
+    for (i in k until inputArray.size) {
+        var localSum = 0
+        for (j in 0 until k) {
+            localSum+= inputArray[i - j]
+        }
+        if (localSum > maximum) {
+            maximum = localSum
+        }
+    }
+    return maximum
+}
+
+fun buildPalindrome(st: String): String {
+    var i = 0
+    var addedStr = ""
+    var resultString = st
+    while (resultString != resultString.reversed()) {
+        addedStr = st[i] + addedStr
+        i++
+        resultString = st + addedStr
+    }
+    return resultString
+}
+
+fun buildPalindrome2(st: String): String {
+    if (st.length < 2) {
+        return ""
+    }
+    for (i in 1 until st.length) {
+        if (i < st.length - 1 && st[i - 1] == st[i + 1]) {
+            val left = st.substring(0 until i)
+            val right = st.substring(i + 1 until st.length)
+            val reversedLeft = left.reversed()
+            if (reversedLeft.startsWith(right)) {
+                return st + reversedLeft.replaceFirst(right, "")
+            }
+        }
+        if (st[i - 1] == st[i]) {
+            val left = st.substring(0 until i)
+            val right = st.substring(i until st.length)
+            val reversedLeft = left.reversed()
+            if (reversedLeft.startsWith(right)) {
+                return st + reversedLeft.replaceFirst(right, "")
+            }
+        }
+    }
+    val reversedStr = st.reversed()
+    return st + reversedStr.subSequence(1 until reversedStr.length)
+}
