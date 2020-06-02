@@ -557,3 +557,24 @@ fun buildPalindrome2(st: String): String {
     val reversedStr = st.reversed()
     return st + reversedStr.subSequence(1 until reversedStr.length)
 }
+
+fun electionsWinners(votes: MutableList<Int>, k: Int): Int {
+    var maxVotes = 0
+    var countMax = 0
+    for (i in 0 until votes.size) {
+        if (votes[i] > maxVotes) {
+            maxVotes = votes[i]
+            countMax = 0
+        } else if (votes[i] == maxVotes) {
+            countMax++
+        }
+    }
+    return when {
+        k > 0 -> votes.count { (it + k) > maxVotes }
+        countMax > 0 -> 0
+        else -> 1
+    }
+}
+
+fun isMAC48Address(inputString: String) =
+        inputString.matches(Regex("((^|-)[0-9A-F]{2}){6}"))

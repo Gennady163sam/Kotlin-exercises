@@ -95,6 +95,9 @@ fun isListPalindrome(l: ListNode<Int>?): Boolean {
     return true
 }
 
+
+
+
 /*fun goodStringsCount(len: Int): Int {
     if (len == 1) return 0
     var sum = 0
