@@ -578,3 +578,28 @@ fun electionsWinners(votes: MutableList<Int>, k: Int): Int {
 
 fun isMAC48Address(inputString: String) =
         inputString.matches(Regex("((^|-)[0-9A-F]{2}){6}"))
+fun addToResult(char: Char, charCount: Int, result: String) =
+        if (charCount > 1) {
+            result + charCount.toString() + char
+        } else {
+            result + char
+        }
+
+fun lineEncoding(s: String): String {
+    var currentChar = s[0]
+    var result = ""
+    var charCount = 1
+    for(i in 1 until s.length) {
+        if(s[i] == currentChar) {
+            charCount++
+        } else {
+            result = addToResult(currentChar, charCount, result)
+            charCount = 1
+            currentChar = s[i]
+        }
+        if (i == s.length - 1) {
+            result = addToResult(currentChar, charCount, result)
+        }
+    }
+    return result
+}
