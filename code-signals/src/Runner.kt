@@ -45,6 +45,7 @@ fun main() {
                     }
                 }
             })*/
+        lineEncoding("aabbbc")
     )
 }
 
@@ -94,6 +95,7 @@ fun isListPalindrome(l: ListNode<Int>?): Boolean {
     }
     return true
 }
+
 
 
 
