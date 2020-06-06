@@ -603,3 +603,37 @@ fun lineEncoding(s: String): String {
     }
     return result
 }
+
+
+
+fun checkValid(letter: Char, num: Char) =
+        if (letter in 'a'..'h' && num in '1'..'8') 1 else 0
+
+fun chessKnight(cell: String): Int {
+    var countMoves = 0
+    countMoves += checkValid(cell[0] - 2, cell[1] - 1)
+    countMoves += checkValid(cell[0] - 1, cell[1] - 2)
+    countMoves += checkValid(cell[0] + 1, cell[1] - 2)
+    countMoves += checkValid(cell[0] + 2, cell[1] - 1)
+    countMoves += checkValid(cell[0] + 2, cell[1] + 1)
+    countMoves += checkValid(cell[0] + 1, cell[1] + 2)
+    countMoves += checkValid(cell[0] - 2, cell[1] + 1)
+    countMoves += checkValid(cell[0] - 1, cell[1] + 2)
+    return countMoves
+}
+
+fun deleteDigit(n: Int): Int {
+    val numAsStr = n.toString()
+    var maxNum = 0
+    for (i in numAsStr.indices) {
+        val newNum = numAsStr.removeRange(i..i).toInt()
+        if (newNum > maxNum) maxNum = newNum
+    }
+    return maxNum
+}
+
+fun longestWord(text: String) =
+        Regex("[a-zA-Z]*")
+                .findAll(text)
+                .map { it.groupValues[0] }
+                .maxBy { it.length }!!
