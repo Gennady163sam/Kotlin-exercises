@@ -637,3 +637,12 @@ fun longestWord(text: String) =
                 .findAll(text)
                 .map { it.groupValues[0] }
                 .maxBy { it.length }!!
+
+fun sumUpNumbers(inputString: String) =
+        "(\\d+)".toRegex().findAll(inputString)
+                .map{ it.value.toInt() }
+                .sum()
+
+fun validTime(time: String) = with(time.split(":")) {
+    this[0].toInt() in 0..23 && this[1].toInt() in 0..59
+}
