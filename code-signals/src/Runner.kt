@@ -1,10 +1,5 @@
 package test
 
-import kotlin.math.ceil
-import kotlin.math.log
-import kotlin.math.max
-import kotlin.math.pow
-
 fun main() {
     val root = Tree(1).also {
         it.left = Tree(2).also {
@@ -45,7 +40,7 @@ fun main() {
                     }
                 }
             })*/
-        longestWord("Ready, steady, go!")
+        sumUpNumbers("2 apples, 12 oranges")
     )
 }
 
@@ -97,6 +92,30 @@ fun isListPalindrome(l: ListNode<Int>?): Boolean {
 }
 
 
+
+fun strstr(s: String, x: String): Int {
+    s.indexOf(x)
+    var internalIndex = 0
+    var startIndex = -1
+    for (i in s.indices) {
+        if (internalIndex == x.length) return startIndex
+        if (s[i] != x[internalIndex]) {
+            internalIndex = 0
+            startIndex = -1
+        }
+        if (s[i] == x[internalIndex]) {
+            if (startIndex == -1) startIndex = i
+            internalIndex++
+        }
+    }
+    return if (internalIndex >= x.length) return startIndex else -1
+}
+
+/*fun kthLargestElement(nums: MutableList<Int>, k: Int): Int {
+    val queue = sortedOf<Int>()
+    queue.addAll(nums)
+    return if (queue.size - k > 0) queue.elementAt(queue.size - k) else queue.elementAt(0)
+}*/
 
 
 /*fun goodStringsCount(len: Int): Int {
