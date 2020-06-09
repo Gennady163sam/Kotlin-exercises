@@ -646,3 +646,38 @@ fun sumUpNumbers(inputString: String) =
 fun validTime(time: String) = with(time.split(":")) {
     this[0].toInt() in 0..23 && this[1].toInt() in 0..59
 }
+
+/**
+ * https://app.codesignal.com/arcade/intro/level-12/fQpfgxiY6aGiGHLtv
+ */
+fun differentSquares(matrix: MutableList<MutableList<Int>>): Int {
+    val squares = mutableSetOf<Pair<Pair<Int, Int>, Pair<Int, Int>>>()
+    for (col in 0 until matrix.size - 1) {
+        for (row in 0 until matrix[col].size - 1) {
+            squares.add(Pair(Pair(matrix[col][row], matrix[col][row + 1]), Pair(matrix[col+1][row], matrix[col + 1][row + 1])))
+        }
+    }
+    return squares.size
+}
+
+/**
+ * https://app.codesignal.com/arcade/intro/level-12/NJJhENpgheFRQbPRA
+ */
+fun digitsProduct(product: Int): Int {
+    if (product == 0) return 10
+    if (product < 9) return product
+    var result = ""
+    var num = 9
+    var residue = product
+    while(residue > 1) {
+        if (num < 2) return -1
+        if (residue % num == 0) {
+            result = num.toString() + result
+            residue /= num
+            num = 9
+            continue
+        }
+        num--
+    }
+    return result.toInt()
+}
