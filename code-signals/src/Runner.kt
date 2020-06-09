@@ -40,7 +40,7 @@ fun main() {
                     }
                 }
             })*/
-        sumUpNumbers("2 apples, 12 oranges")
+        digitsProduct(360)
     )
 }
 
@@ -116,8 +116,6 @@ fun strstr(s: String, x: String): Int {
     queue.addAll(nums)
     return if (queue.size - k > 0) queue.elementAt(queue.size - k) else queue.elementAt(0)
 }*/
-
-
 /*fun goodStringsCount(len: Int): Int {
     if (len == 1) return 0
     var sum = 0
