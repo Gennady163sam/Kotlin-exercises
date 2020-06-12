@@ -40,7 +40,18 @@ fun main() {
                     }
                 }
             })*/
-        digitsProduct(360)
+        fileNaming(mutableListOf("a(1)",
+                "a(6)",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a",
+                "a"))
     )
 }
 
@@ -89,26 +100,6 @@ fun isListPalindrome(l: ListNode<Int>?): Boolean {
 
     }
     return true
-}
-
-
-
-fun strstr(s: String, x: String): Int {
-    s.indexOf(x)
-    var internalIndex = 0
-    var startIndex = -1
-    for (i in s.indices) {
-        if (internalIndex == x.length) return startIndex
-        if (s[i] != x[internalIndex]) {
-            internalIndex = 0
-            startIndex = -1
-        }
-        if (s[i] == x[internalIndex]) {
-            if (startIndex == -1) startIndex = i
-            internalIndex++
-        }
-    }
-    return if (internalIndex >= x.length) return startIndex else -1
 }
 
 /*fun kthLargestElement(nums: MutableList<Int>, k: Int): Int {

@@ -681,3 +681,52 @@ fun digitsProduct(product: Int): Int {
     }
     return result.toInt()
 }
+
+/**
+ * https://app.codesignal.com/interview-practice/task/C8Jdyk3ybixqQdAvM
+ * Method Knuth-Morass-Pratt
+ */
+fun strstr(s: String, x: String): Int {
+    val str = "$x@$s"
+    val size = str.length
+    val pi = IntArray(size)
+    pi[0] = 0
+    for (i in 1 until size) {
+        var j = pi[i - 1]
+        while ((j > 0) && (str[i] != str[j])) {
+            j = pi[j - 1]
+        }
+
+        if (str[i] == str[j]) {
+            j++
+        }
+        pi[i] = j
+        if (j == x.length) {
+            return i - (x.length * 2)
+        }
+    }
+    return -1
+}
+
+/**
+ * https://app.codesignal.com/arcade/intro/level-12/sqZ9qDTFHXBNrQeLC
+ */
+fun fileNaming(names: MutableList<String>): MutableList<String> {
+    val namesMap = mutableMapOf<String, Int>()
+    val result = mutableListOf<String>()
+    for (i in names.indices) {
+        var countOfName = namesMap[names[i]]?:0
+        if (countOfName == 0) {
+            namesMap[names[i]] = 1
+            result.add(names[i])
+        } else {
+            while (namesMap.containsKey(names[i] + "($countOfName)")) {
+                countOfName++
+            }
+            namesMap[names[i]] = countOfName
+            namesMap[names[i] + "($countOfName)"] = 1
+            result.add(names[i] + "($countOfName)")
+        }
+    }
+    return result
+}
