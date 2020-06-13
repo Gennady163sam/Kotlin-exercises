@@ -40,18 +40,7 @@ fun main() {
                     }
                 }
             })*/
-        fileNaming(mutableListOf("a(1)",
-                "a(6)",
-                "a",
-                "a",
-                "a",
-                "a",
-                "a",
-                "a",
-                "a",
-                "a",
-                "a",
-                "a"))
+        spiralNumbers(4)
     )
 }
 
@@ -115,4 +104,3 @@ fun isListPalindrome(l: ListNode<Int>?): Boolean {
     }
     return sum
 }*/
-

@@ -730,3 +730,54 @@ fun fileNaming(names: MutableList<String>): MutableList<String> {
     }
     return result
 }
+
+/**
+ * https://app.codesignal.com/arcade/intro/level-12/sCpwzJCyBy2tDSxKW
+ */
+fun messageFromBinaryCode(code: String): String {
+    val chunkedCode = code.chunked(8)
+    return chunkedCode.map {
+        it.toInt(2).toChar()
+    }.joinToString(separator = "")
+}
+
+/**
+ * https://app.codesignal.com/arcade/intro/level-12/uRWu6K8E7uLi3Qtvx
+ */
+fun spiralNumbers(n: Int): MutableList<MutableList<Int>> {
+    val result = MutableList(n) { MutableList(n) {0} }
+    var row = 0
+    var col = 0
+    var num = 1
+    var borderRight = n
+    var borderLeft = -1
+    var borderUp = -1
+    var borderDown = n
+    while (num - 1 < n * n) {
+        while (col < borderRight) {
+            result[row][col++] = num++
+        }
+        col--
+        row++
+        borderUp++
+        while (row < borderDown) {
+            result[row++][col] = num++
+        }
+        row--
+        col--
+        borderRight--
+        while (col > borderLeft) {
+            result[row][col--] = num++
+        }
+        col++
+        row--
+        borderDown--
+        while (row > borderUp) {
+            result[row--][col] = num++
+        }
+        row++
+        col++
+        borderLeft++
+    }
+    return result
+}
