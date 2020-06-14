@@ -40,7 +40,7 @@ fun main() {
                     }
                 }
             })*/
-        spiralNumbers(4)
+        lateRide(240)
     )
 }
 

@@ -781,3 +781,85 @@ fun spiralNumbers(n: Int): MutableList<MutableList<Int>> {
     }
     return result
 }
+
+private fun isValid(set: MutableSet<Int>): Boolean {
+    return set.containsAll(listOf(1,2,3,4,5,6,7,8,9))
+}
+
+private fun checkColumn(grid: MutableList<MutableList<Int>>, col: Int): Boolean {
+    val nums = mutableSetOf<Int>()
+    for (row in 0 until grid.size) {
+        nums.add(grid[row][col])
+    }
+    return isValid(nums)
+}
+
+private fun checkRow(grid: MutableList<MutableList<Int>>, row: Int): Boolean {
+    val nums = mutableSetOf<Int>()
+    for (col in 0 until grid.size) {
+        nums.add(grid[row][col])
+    }
+    return isValid(nums)
+}
+
+private fun checkSquare(grid: MutableList<MutableList<Int>>, minRow: Int, minCol: Int): Boolean {
+    val nums = mutableSetOf(grid[minRow][minCol], grid[minRow][minCol+1], grid[minRow][minCol + 2],
+            grid[minRow + 1][minCol], grid[minRow+1][minCol+1], grid[minRow+1][minCol+2],
+            grid[minRow+2][minCol], grid[minRow+2][minCol+1], grid[minRow+2][minCol+2])
+    return isValid(nums)
+}
+
+/**
+ * https://app.codesignal.com/arcade/intro/level-12/tQgasP8b62JBeirM
+ */
+fun sudoku(grid: MutableList<MutableList<Int>>): Boolean {
+    for (i in grid.indices) {
+        if (!checkRow(grid, i) || !checkColumn(grid, i)) return false
+    }
+    return checkSquare(grid, 0, 0) && checkSquare(grid, 0, 3) && checkSquare(grid, 0, 6) &&
+            checkSquare(grid, 3, 0) && checkSquare(grid, 3, 3) && checkSquare(grid, 3, 6) &&
+            checkSquare(grid, 6, 0) && checkSquare(grid, 6, 3) && checkSquare(grid, 6, 6)
+}
+
+/**
+ * https://app.codesignal.com/challenge/aBAm93zzrw4rXxhQk
+ */
+fun sortByString(s: String, t: String): String {
+    var letters = s
+    val result = StringBuilder()
+    for (i in t.indices) {
+        val letter = t[i]
+        val letterAsString = letter.toString()
+        val countOfLetter = letters.count { it == letter }
+        result.append(letterAsString.repeat(countOfLetter))
+        letters = letters.replace(letterAsString, "")
+    }
+    return result.toString() + letters
+}
+
+/**
+ * https://app.codesignal.com/arcade/code-arcade/intro-gates/aiKck9MwwAKyF8D4L
+ */
+fun lateRide(n: Int): Int {
+    val hours = n / 60
+    val minutes = n % 60
+    return (hours.toString() + minutes.toString()).sumBy { Character.digit(it, 10) }
+}
+
+/**
+ * https://app.codesignal.com/arcade/code-arcade/at-the-crossroads/m9wjpkCjgofg7gs8N
+ */
+fun phoneCall(min1: Int, min2_10: Int, min11: Int, s: Int): Int {
+    if (s < min1) return 0
+    var minutes = 1
+    var money = s
+    money -= min1
+    if (money < min2_10 * 9) {
+        minutes += money / min2_10
+        return minutes
+    }
+    minutes += 9
+    money -= min2_10 * 9
+    minutes += money / min11
+    return minutes
+}
