@@ -1,5 +1,9 @@
 package test
 
+import java.lang.StringBuilder
+import java.util.stream.IntStream
+import kotlin.math.max
+
 fun main() {
     val root = Tree(1).also {
         it.left = Tree(2).also {
@@ -40,7 +44,6 @@ fun main() {
                     }
                 }
             })*/
-        lateRide(240)
     )
 }
 

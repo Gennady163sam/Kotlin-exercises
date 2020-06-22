@@ -1,6 +1,7 @@
 package test
 
 import java.lang.StringBuilder
+import java.util.stream.IntStream
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.log
@@ -863,3 +864,21 @@ fun phoneCall(min1: Int, min2_10: Int, min11: Int, s: Int): Int {
     minutes += money / min11
     return minutes
 }
+
+/**
+ * https://app.codesignal.com/arcade/code-arcade/at-the-crossroads/r9azLYp2BDZPyzaG
+ */
+fun knapsackLight(value1: Int, weight1: Int, value2: Int, weight2: Int, maxW: Int): Int {
+    if (weight1 + weight2 <= maxW) return value1 + value2
+    if (maxW in weight1 until weight2) return value1
+    if (maxW in weight2 until weight1) return value2
+    if (value1 >= value2 && weight1 <= maxW) return value1
+    if (value2 >= value1 && weight2 <= maxW) return value2
+    return 0
+}
+
+/**
+ * https://app.codesignal.com/arcade/code-arcade/corner-of-0s-and-1s/eC2Zxu5H5SnuKxvPT
+ */
+fun rangeBitCount(a: Int, b: Int) =
+        IntStream.range(a,b).map { Integer.bitCount(it) }.sum()
