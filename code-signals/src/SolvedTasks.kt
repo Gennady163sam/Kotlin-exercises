@@ -882,3 +882,87 @@ fun knapsackLight(value1: Int, weight1: Int, value2: Int, weight2: Int, maxW: In
  */
 fun rangeBitCount(a: Int, b: Int) =
         IntStream.range(a,b).map { Integer.bitCount(it) }.sum()
+/**
+ * https://app.codesignal.com/arcade/code-arcade/loop-tunnel/hBw5BJiZ4LmXcy92u
+ */
+fun countSumOfTwoRepresentations2(n: Int, l: Int, r: Int): Int {
+    var countSum = 0
+    for (i in l .. r) {
+        if (n - i in i..r) countSum++
+    }
+    return countSum
+}
+
+fun isLuckyNumber(n: Int): Boolean {
+    return n.toString().filter { it == '4' || it == '7' }.count() == n.toString().length
+}
+fun digitDifferenceSort(a: MutableList<Int>): List<Int> {
+    return a.sortedBy { it.toString().max()!! - it.toString().min()!! }
+}
+fun evenNumbersBeforeFixed(sequence: MutableList<Int>, fixedElement: Int): Int {
+    val res = sequence.takeWhile { it != fixedElement }
+    if (res.size == sequence.size) return -1
+    return res.count { it % 2 == 0 }
+}
+
+fun characterParity(s: Char) =
+        if (!s.isDigit()) "not a digit" else if (Character.getNumericValue(s) % 2 == 0) "even" else "odd"
+
+/**
+ * https://app.codesignal.com/arcade/code-arcade/loop-tunnel/LbuWRHnMoJH9SAo4o
+ */
+fun magicalWell(a: Int, b: Int, n: Int): Int {
+    var money = 0
+    for (i in 0 until n) {
+        money += (a + i) * (b + i)
+    }
+    return money
+}
+
+/**
+ * https://app.codesignal.com/arcade/code-arcade/loop-tunnel/8rqs3BLpdKePhouQM
+ */
+fun lineUp(commands: String): Int {
+    var res = 0
+    var eq = true
+    for (i in commands) {
+        if (i == 'L' || i =='R')
+            eq = !eq
+        res += if (eq) 1 else 0
+    }
+    return res
+}
+
+/**
+ * https://app.codesignal.com/arcade/code-arcade/loop-tunnel/xzeZqCQjpfDJuN72S
+ */
+fun additionWithoutCarrying(param1: Int, param2: Int): Int {
+    var firstNum = param1.toString()
+    var secondNum = param2.toString()
+    val diff = firstNum.length - secondNum.length
+    if (diff > 0) secondNum = "0".repeat(diff) + secondNum
+    if (diff < 0) firstNum = "0".repeat(abs(diff)) + firstNum
+    var res = ""
+    for (i in firstNum.indices) {
+        res += ((Character.getNumericValue(firstNum[i]) + Character.getNumericValue(secondNum[i])) % 10).toString()
+    }
+    return res.toInt()
+}
+
+fun calcCountApples (m: Int, apples: IntArray): IntArray {
+    if (m == 0) return apples
+    if (m % 2 == 0) {
+        apples[1] += m * m
+    } else {
+        apples[0] += m * m
+    }
+    return calcCountApples(m - 1, apples)
+}
+
+/**
+ * https://app.codesignal.com/arcade/code-arcade/loop-tunnel/scG8AFsPuqQGx8Qjf/solutions
+ */
+fun appleBoxes(k: Int): Int {
+    val apples = calcCountApples(k, IntArray(2))
+    return apples[1] - apples[0]
+}
